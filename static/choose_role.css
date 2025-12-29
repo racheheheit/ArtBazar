@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e3b656, #c12f15);
+  color: #fff;
+}
+
+.container {
+  text-align: center;
+  padding: 2rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.role-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.role-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  width: 260px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.role-card .icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.role-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.role-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.role-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.artist:hover {
+  background: linear-gradient(135deg, #ffdb99, #e3b656);
+  color: #333;
+}
+
+.vendor:hover {
+  background: linear-gradient(135deg, #ffd0c2, #d35022);
+  color: #fff;
+}
+
+.customer:hover {
+  background: linear-gradient(135deg, #f0f0f0, #bfbfbf);
+  color: #333;
+}
+.image1 {
+  position: absolute;
+  bottom: 0;
+  right: 0.1%;
+  width: 500px;
+  max-width: 45vw;
+  min-width: 35vw;
+  z-index: 1;
+}
+
+.image1 img {
+  width: 95%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.95;
+  border-radius: 20px;
+}
+
+.image2 {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  left: 0.1%;
+  width: 500px;
+  max-width: 45vw;
+  min-width: 35vw;
+  z-index: 1;
+}
+
+.image2 img {
+  width: 95%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.95;
+  border-radius: 20px;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .role-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .role-card {
+    width: 80%;
+  }
+   .image1,
+  .image2 {
+    position: absolute;
+    width: 25vw;
+    max-width: 300px;
+    opacity: 0.9;
+  }
+
+  .image1 {
+    right: 0.1%;
+  }
+
+  .image2 {
+    left: 0.1%;
+  }
+}
+

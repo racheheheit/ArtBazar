@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | ArtBzaar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 1.5rem 0;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(6px);
+    }
+
+    header img {
+      width: 70px;
+      vertical-align: middle;
+    }
+
+    header h1 {
+      display: inline-block;
+      margin-left: 10px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    .contact-container {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2.5rem 3rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input, textarea {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      resize: none;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #c12f15;
+      box-shadow: 0 0 6px rgba(193, 47, 21, 0.3);
+    }
+
+    button {
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      border: none;
+      color: white;
+      padding: 12px 0;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      background: linear-gradient(135deg, #c3c3c3, #e3b656);
+      color: #333;
+    }
+
+    .info {
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .info a {
+      color: #c12f15;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .info a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      color: white;
+      background: rgba(0, 0, 0, 0.2);
+      margin-top: auto;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      .contact-container {
+        margin: 2rem 1rem;
+        padding: 1.8rem;
+      }
+    }
+    .flash-message {
+  max-width: 600px;
+  margin: 15px auto;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+.flash-message.success { background: #d4edda; color: #155724; }
+.flash-message.danger  { background: #f8d7da; color: #721c24; }
+
+  </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash-message {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+  <header>
+    <img src="/static/logo.png" alt="ArtBzaar Logo">
+    <h1>ArtBzaar</h1>
+  </header>
+
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>We’d love to hear from you! Whether you’re an artist, vendor, or art enthusiast, feel free to reach out with your questions or ideas.</p>
+
+    <form action="/send_message" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="info">
+      <p>Or contact us directly at <a href="mailto:artbazarmail@gmail.com">artbazarmail@gmail.com</a></p>
+     <p><a herf="{{url_for('home')}}">Dashboard</a></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 ArtBzaar | Rachit Singh Rana</p>
+  </footer>
+</body>
+</html>

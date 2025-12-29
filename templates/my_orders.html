@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders | ArtBzaar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #c6f3ff, #0a3359);
+      margin: 0;
+      color: #333;
+    }
+
+    header {
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      color: white;
+    }
+
+    a { text-decoration: none; }
+
+    .orders-container {
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .order-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 14px;
+      margin: 1.5rem auto;
+      max-width: 750px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      text-align: left;
+    }
+
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .status {
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .pending { background: #ffc107; color: #444; }
+    .completed { background: #28a745; }
+    .failed { background: #dc3545; }
+
+    .item-box {
+      background: #f7f7f7;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.8rem;
+      border-left: 4px solid #0a3359;
+    }
+
+    .item-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .no-orders {
+      margin-top: 3rem;
+      font-size: 1.2rem;
+      color: white;
+    }
+
+    .customer-info {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.2rem;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h2>ArtBzaar</h2>
+  <nav>
+    {% if role == 'customer' %}
+      <a href="{{ url_for('customer_dashboard') }}" style="color:white;">Dashboard</a>
+      <a href="{{ url_for('cart') }}" style="color:white; margin-left:1rem;">Cart</a>
+    {% elif role == 'artist' %}
+      <a href="{{ url_for('artist_dashboard') }}" style="color:white;">Dashboard</a>
+    {% elif role == 'vendor' %}
+      <a href="{{ url_for('vendor_dashboard') }}" style="color:white;">Dashboard</a>
+    {% endif %}
+  </nav>
+</header>
+
+<section class="orders-container">
+
+  <h2 style="color:white; margin-bottom:1.5rem;">
+    {% if role == 'customer' %}
+      My Orders
+    {% elif role == 'artist' %}
+      Orders for My Artworks
+    {% else %}
+      Orders for My Supplies
+    {% endif %}
+  </h2>
+
+  {% if orders %}
+    {% for order in orders %}
+    <div class="order-card">
+
+      <div class="order-header">
+        <div>
+          <h3 style="margin:0;">Order #{{ order.Order_ID }}</h3>
+          <p style="margin:3px 0; color:#555;">Date: {{ order.Date }}</p>
+        </div>
+
+        <div class="status 
+          {% if order.Status == 'Pending' %}pending
+          {% elif order.Status == 'Completed' %}completed
+          {% else %}failed
+          {% endif %}
+        ">
+          {{ order.Status }}
+        </div>
+      </div>
+
+      <h4 style="margin-bottom:10px;">Items:</h4>
+
+      <!-- FIXED LINE BELOW -->
+      {% for item in order["items"] %}
+      <div class="item-box">
+
+        {% if item.Artwork_Title %}
+          <div class="item-title">🎨 Artwork: {{ item.Artwork_Title }}</div>
+        {% else %}
+          <div class="item-title">🛒 Supply: {{ item.Supply_Title }}</div>
+        {% endif %}
+
+        <div>Quantity: {{ item.Quantity }}</div>
+        <div>Price: ₹{{ item.Price }}</div>
+
+        {% if role != 'customer' %}
+        <div class="customer-info">
+           Customer: {{ item.Customer_Name }}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+    </div>
+    {% endfor %}
+  {% else %}
+    <p class="no-orders">No orders found.</p>
+  {% endif %}
+</section>
+
+</body>
+</html>

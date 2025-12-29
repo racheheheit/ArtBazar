@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart | ArtBazar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #c6f3ff, #0a3359);
+      color: #2c2c2c;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      color: #222222;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo img {
+      width: 45px;
+      border-radius: 10px;
+    }
+    .logo h1 {
+      font-size: 1.6rem;
+      color: #313131;
+      font-weight: 600;
+    }
+
+    a {
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    a:hover {
+      color: #c6f3ff;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      flex-grow: 1;
+      backdrop-filter: blur(6px);
+    }
+
+    h2 {
+      text-align: center;
+      color: #194c86;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      font-weight: 600;
+    }
+
+    /* Cart Items */
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding: 1rem 0;
+      gap: 1rem;
+      flex-wrap: wrap;
+      transition: background 0.2s ease;
+    }
+
+    .cart-item:hover {
+      background: rgba(198, 243, 255, 0.15);
+      border-radius: 12px;
+    }
+
+    .cart-item img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      background: #f8f9fb;
+      border-radius: 10px;
+      padding: 8px;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .item-info {
+      flex: 1;
+      min-width: 200px;
+      padding-left: 0.5rem;
+    }
+
+    .item-info h3 {
+      font-size: 1.1rem;
+      color: #194c86;
+      margin-bottom: 0.3rem;
+    }
+
+    .item-info p {
+      font-size: 0.9rem;
+      color: #555;
+      margin: 0.2rem 0;
+    }
+
+    .item-price {
+      font-weight: 600;
+      color: #0b2f3f;
+      margin-top: 0.3rem;
+    }
+
+    /* Buttons */
+    .remove-btn {
+      background: #194c86;
+      color: white;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+    .remove-btn:hover {
+      background: #0b2f3f;
+      transform: scale(1.05);
+    }
+
+    /* Summary */
+    .summary {
+      margin-top: 2rem;
+      text-align: right;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0b2f3f;
+    }
+
+    .checkout-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      background: #194c86;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .checkout-btn:hover {
+      background: #0b2f3f;
+      transform: scale(1.05);
+    }
+
+    /* Empty Cart */
+    .empty-cart {
+      text-align: center;
+      color: #575757;
+      font-size: 1rem;
+      margin-top: 3rem;
+    }
+
+    footer {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    footer p {
+      color: #e8f8ff;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .cart-item { flex-direction: column; align-items: flex-start; }
+      .item-info { margin-top: 0.5rem; }
+      .summary { text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="/static/logo.png" alt="ArtBazar">
+      <h1>ArtBazar</h1>
+    </div>
+    <a href="{{ url_for('customer_gallery') }}">Continue Shopping</a>
+  </header>
+
+  <!-- Cart Container -->
+  <div class="container">
+    <h2>Your Cart 🛒</h2>
+
+    {% if cart_items %}
+      {% for item in cart_items %}
+        <div class="cart-item">
+          {# Choose image path based on item type #}
+          {% if item.Artwork_ID %}
+            {% set img_path = item.Artwork_Image %}
+          {% else %}
+            {% set img_path = item.Supply_Image %}
+          {% endif %}
+
+          <img src="/{{ img_path }}" alt="Item Image">
+
+          <div class="item-info">
+            <h3>
+              {% if item.Artwork_ID %}
+                {{ item.Artwork_Title }}
+              {% else %}
+                {{ item.Supply_Title }}
+              {% endif %}
+            </h3>
+
+            <p>
+              {% if item.Artwork_ID %}
+                Artist: {{ item.Artist_Name or 'Unknown' }}
+              {% else %}
+                Vendor: {{ item.Vendor_Name or 'Unknown' }}
+              {% endif %}
+            </p>
+
+            <p class="item-price">
+              ₹
+              {% if item.Artwork_ID %}
+                {{ item.Artwork_Price }}
+              {% else %}
+                {{ item.Supply_Price }}
+              {% endif %}
+            </p>
+          </div>
+
+          <form action="{{ url_for('remove_from_cart', cart_id=item.Cart_ID) }}" method="post">
+            <button type="submit" class="remove-btn">Remove</button>
+          </form>
+        </div>
+      {% endfor %}
+
+      <div class="summary">
+        Total: ₹{{ total }}
+        <br>
+        <form action="{{ url_for('checkout') }}" method="post">
+          <button type="submit" class="checkout-btn">Proceed to Order</button>
+        </form>
+      </div>
+
+    {% else %}
+      <div class="empty-cart">
+        <p>Your cart is empty! Add artworks or supplies you love.</p>
+      </div>
+    {% endif %}
+
+  </div>
+
+  <footer>
+    <p>© 2025 ArtBazar | Rachit Singh Rana</p>
+  </footer>
+</body>
+</html>

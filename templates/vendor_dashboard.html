@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Dashboard | ArtBzaar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body {
+      font-family:'Poppins',sans-serif;
+      background: linear-gradient(135deg, #3a3abb, #c12f15);
+      color:#fff;min-height:100vh;display:flex;flex-direction:column;
+    }
+    header {
+      display:flex;justify-content:space-between;align-items:center;
+      padding:1rem 3rem;background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.2);
+    }
+    header .logo {display:flex;align-items:center;gap:10px;}
+    header .logo img{width:45px;}
+    header nav a{
+      margin-left:1.5rem;text-decoration:none;color:#fff;
+      font-weight:500;transition:color .3s;
+    }
+    header nav a:hover{color:#333;}
+    .hero{text-align:center;padding:4rem 2rem 2rem;}
+    .hero h2{font-size:2.5rem;margin-bottom:.8rem;}
+    .hero p{font-size:1.1rem;color:rgba(255,255,255,.9);}
+    .dashboard{
+      display:flex;justify-content:center;flex-wrap:wrap;
+      gap:2rem;padding:3rem;
+    }
+    .card{
+      background:rgba(255,255,255,0.12);border-radius:20px;
+      padding:2rem;width:280px;text-align:center;
+      transition:all .3s ease;backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.3);
+    }
+    .card h3{font-size:1.3rem;margin-bottom:1rem;}
+    .card p{font-size:.95rem;margin-bottom:1.5rem;}
+    .card:hover{transform:translateY(-10px) scale(1.05);
+      background:rgba(255,255,255,0.25);}
+    .btn{
+      text-decoration:none;background:#fff;color:#333;
+      padding:.7rem 1.4rem;border-radius:25px;font-weight:600;
+      transition:all .3s ease;
+    }
+    .btn:hover{background:#4d208e;color:#fff;}
+    footer{
+      margin-top:auto;text-align:center;padding:1rem;font-size:.9rem;
+      background:rgba(0,0,0,0.15);backdrop-filter:blur(6px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="ArtBzaar Logo">
+      <h1>Vendor Panel</h1>
+    </div>
+    <nav>
+      <a href="{{url_for('home')}}">Home</a>
+      <a href="{{url_for('vendor_inventory')}}">My Products</a>
+      <a href="{{url_for('my_orders')}}">Orders</a>
+      <a href="{{url_for('messages')}}">Messages</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="welcome">
+      <h2>Welcome, {{ session['user']['name'] if session.get('user') else 'Vendor' }} </h2>
+      <p>Manage your art supplies, monitor orders, and expand your creative reach.</p>
+    </div>
+  </section>
+
+  <section class="dashboard">
+    <div class="card upload">
+      <h3> Add Product</h3>
+      <p>List new art materials or handmade items for sale.</p>
+      <a href="{{url_for('add_item')}}" class="btn">Add Now</a>
+    </div>
+
+    <div class="card inventory">
+      <h3> Manage Inventory</h3>
+      <p>Update stock, prices, and availability of your supplies.</p>
+      <a href="{{url_for('vendor_inventory')}}" class="btn">Manage</a>
+    </div>
+
+    <div class="card orders">
+      <h3> View Orders</h3>
+      <p>Track and fulfill incoming customer orders.</p>
+      <a href="{{url_for('my_orders')}}" class="btn">View Orders</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 ArtBazar | Rachit Singh Rana</p>
+  </footer>
+</body>
+</html>

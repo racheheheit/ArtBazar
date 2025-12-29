@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ artist_name }}'s Gallery | ArtBazar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: #fdfdfd;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header / Navbar */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 45px;
+      border-radius: 10px;
+    }
+
+    .logo h1 {
+      font-family: 'Momo Trust Display', sans-serif;
+      font-size: 1.6rem;
+      color: #282828;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-info {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .btn-back {
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      border: none;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-back:hover {
+      background: linear-gradient(135deg, #d19744, #9e2710);
+      transform: scale(1.05);
+    }
+
+    /* Banner */
+    .banner {
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      color: white;
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+
+    .banner h2 {
+      font-family: 'Momo Trust Display', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .banner p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Upload Button */
+    .upload-btn {
+      display: block;
+      margin: 2rem auto;
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .upload-btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, #d19744, #9e2710);
+    }
+
+    /* Gallery Grid */
+   /* Gallery Grid */
+.gallery-grid {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+}
+
+/* Artwork Card */
+.art-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Image Wrapper — keeps consistent aspect ratio */
+.art-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3; /* keeps consistent proportions */
+  object-fit: contain; /* prevents cropping */
+  background-color: #fafafa; /* subtle background behind transparent images */
+  padding: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Image Hover Effect */
+.art-card:hover {
+  transform: scale(1.04);
+}
+
+/* Info section */
+.info {
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+
+.info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: #c12f15;
+  font-weight: 600;
+}
+
+.info p {
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+
+form[method="POST"] select,
+form[method="POST"] input {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+}
+
+form[method="POST"] button:hover {
+  background: linear-gradient(135deg, #e3b656, #c12f15);
+  color: white;
+}
+
+
+
+    /* Footer */
+    footer {
+      background: #2c2c2c;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .banner h2 { font-size: 1.8rem; }
+      .gallery-grid { gap: 1rem; }
+      .btn-back { padding: 0.4rem 1rem; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header Navbar -->
+  <header>
+    <div class="logo">
+      <img src="/static/logo.png" alt="ArtBazar">
+      <h1>ArtBazar</h1>
+    </div>
+
+    <div class="nav-right">
+      <div class="user-info">Logged in as <b>{{ artist_name }}</b></div>
+      <a href="{{ url_for('artist_dashboard') }}" class="btn-back"> Dashboard</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="banner">
+    <h2>{{ artist_name }}'s Gallery</h2>
+    <p>Explore all artworks uploaded by {{ artist_name }}.</p>
+  </section>
+
+  <!-- Upload Button -->
+  <a href="{{ url_for('add_artwork') }}">
+    <button class="upload-btn">+ Upload New Artwork</button>
+  </a>
+
+  <!-- Artwork Grid -->
+  <section class="gallery-grid">
+    {% if artworks %}
+      {% for art in artworks %}
+        <div class="art-card">
+          <img src="{{ url_for('static', filename=art['Image'].replace('static/', '')) }}" alt="{{ art['Title'] }}">
+          <div class="info">
+            <h3>{{ art['Title'] }}</h3>
+            <p>{{ art['Caption'] or "No description provided." }}</p>
+          </div>
+
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; font-size:1rem; color:#777;">No artworks uploaded yet.</p>
+    {% endif %}
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 ArtBazar | Rachit Singh Rana</p>
+  </footer>
+
+</body>
+</html>

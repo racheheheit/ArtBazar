@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | ArtBzaar</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body {
+      background:linear-gradient(135deg,#0a0f24,#363671);
+      color:white;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 3rem;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(255,255,255,0.3);
+    }
+
+    header img {
+      width:50px;
+    }
+
+    header h1 {
+      margin-left:10px;
+      font-size:1.7rem;
+    }
+
+    nav a {
+      margin-left:1.5rem;
+      text-decoration:none;
+      color:white;
+      font-weight:500;
+      transition:0.3s;
+    }
+
+    nav a:hover {
+      color:#d1d1ff;
+    }
+
+    .hero {
+      text-align:center;
+      padding:3rem 2rem;
+    }
+
+    .hero h2 {
+      font-size:2.4rem;
+      margin-bottom:0.5rem;
+    }
+
+    .hero p {
+      font-size:1.1rem;
+      color:rgba(255,255,255,0.85);
+    }
+
+    .dashboard {
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:2rem;
+      padding:2rem 1rem;
+    }
+
+    .card {
+      width:280px;
+      padding:2rem;
+      border-radius:20px;
+      text-align:center;
+      background:rgba(255,255,255,0.13);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.25);
+      transition:0.3s;
+    }
+
+    .card:hover {
+      transform:translateY(-10px);
+      background:rgba(255,255,255,0.25);
+    }
+
+    .card h3 {
+      font-size:1.3rem;
+      margin-bottom:1rem;
+    }
+
+    .card p {
+      font-size:0.95rem;
+      margin-bottom:1.5rem;
+      color:rgba(240,240,240,0.9);
+    }
+
+    .btn {
+      display:inline-block;
+      padding:0.7rem 1.4rem;
+      background:white;
+      color:#222;
+      border-radius:25px;
+      font-weight:600;
+      text-decoration:none;
+      transition:0.3s;
+    }
+
+    .btn:hover {
+      background:#222;
+      color:white;
+    }
+
+    footer {
+      margin-top:auto;
+      text-align:center;
+      padding:1rem;
+      font-size:0.9rem;
+      background:rgba(0,0,0,0.2);
+      backdrop-filter:blur(5px);
+    }
+  </style>
+
+</head>
+<body>
+
+  <header>
+    <div style="display:flex; align-items:center;">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+      <h1>Admin Panel</h1>
+    </div>
+
+    <nav>
+      <a href="{{ url_for('home') }}">Home</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Welcome, {{ session['user']['name'] }}</h2>
+    <p>Manage users, approve artworks, track orders, and generate reports.</p>
+  </section>
+
+  <section class="dashboard">
+
+    <div class="card">
+      <h3>Manage Users</h3>
+      <p>View, edit, or remove artists, vendors, and customers.</p>
+      <a href="#" class="btn">Open</a>
+    </div>
+
+    <div class="card">
+      <h3>Approve Artworks</h3>
+      <p>Approve or remove artist-uploaded artwork listings.</p>
+      <a href="#" class="btn">Review</a>
+    </div>
+
+    <div class="card">
+      <h3>View Orders</h3>
+      <p>Track all platform orders, payments, and disputes.</p>
+      <a href="#" class="btn">View</a>
+    </div>
+
+    <div class="card">
+      <h3>Generate Reports</h3>
+      <p>Sales analytics and activity summaries for ArtBzaar.</p>
+      <a href="#" class="btn">Generate</a>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2025 ArtBzaar | Admin Panel
+  </footer>
+
+</body>
+</html>

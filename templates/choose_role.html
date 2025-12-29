@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Select Role | ArtBzaar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='choose_role.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome to ArtBzaar</h1>
+    <p>Select your role to continue</p>
+ <div class="image1">
+        <img src="{{url_for('static', filename='herosec1.png')}}" alt="">
+      </div>
+      <div class="image2">
+        <img src="{{url_for('static', filename='herosec2.png')}}" alt="">
+      </div>
+    <div class="role-grid">
+      <a href="/set_role/artist" class="role-card artist">
+        <h2>Artist</h2>
+        <p>Showcase your creativity and sell your handmade artworks.</p>
+      </a>
+
+      <a href="/set_role/vendor" class="role-card vendor">
+        
+        <h2>Vendor</h2>
+        <p>Promote your art supplies and reach more creators.</p>
+      </a>
+
+      <a href="/set_role/customer" class="role-card customer">
+       
+        <h2>Customer</h2>
+        <p>Discover unique art pieces and support local artists.</p>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

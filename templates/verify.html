@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Fascinate&family=Jersey+10&family=Momo+Trust+Display&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Doodle+Triangles&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"> <title>Verify Email | ArtBzaar</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+    .container {
+      font-family: poppins;
+      background-color: #fff;
+      color: #494141;
+      border-radius: 20px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      width: 320px;
+    }
+    h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    input {
+        background-color: #a8a2a2;
+        color: #fff;
+      width: 90%;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 8px;
+      margin: 0.5rem 0;
+      text-align: center;
+      font-size: 1rem;
+    }
+    button {
+      background: linear-gradient(135deg, #e3b656, #c12f15);
+      color: #fff0ee;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.5rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #4b2222;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    .flash {
+      margin-top: 1rem;
+      color: #ffe4b5;
+      font-weight: 500;
+    }
+    a {
+      color: #fff;
+      text-decoration: underline;
+      display: block;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Email Verification</h2>
+    <p>Enter the OTP sent to <strong>{{ email }}</strong></p>
+
+    <form method="POST">
+      <input type="text" name="otp" placeholder="Enter 6-digit OTP" required><br>
+      <button type="submit">Verify</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash">
+          {% for category, message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <a href="{{url_for('signup')}}">Go back to Sign Up</a>
+  </div>
+</body>
+</html>

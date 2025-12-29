@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArtBzaar | Discover and Showcase Art</title>
+  <link rel="stylesheet" href="/static/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Fascinate&family=Jersey+10&family=Momo+Trust+Display&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik+Doodle+Triangles&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+ 
+<header>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="/static/logo.png" alt="Logo">
+    </div>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+    <ul class="nav-links">
+      <li><a href="{{url_for("home")}}">Home </a></li>
+      <li><a href="#about">About </a></li>
+      <li><a href="#gallery">Gallery </a></li>
+      <li><a href="{{url_for('contact')}}">Contact </a></li>
+      <li><a href="{{url_for('signup') }}" class="btn">Sign-Up</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+ 
+  <section id="home" class="hero">
+   
+    <div class="hero-content">
+     <div class="logo2">
+     <a href="#home">
+      <img src="/static/logo.png" alt="Artbazar">
+    </a>
+    </div>
+      <h1>Discover. Create. Inspire.</h1>
+      <p>Welcome to ArtBzaar — where creativity meets community.</p>
+      <a href="#gallery" class="btn">Explore Artworks</a>
+
+      <div class="image1">
+        <img src="/static/herosec1.png" alt="">
+      </div>
+      <div class="image2">
+        <img src="/static/herosec2.png" alt="">
+      </div>
+
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="gallery">
+    <h2>Featured Artworks</h2>
+    <div class="art-grid">
+      <div class="art-card"><img src="https://picsum.photos/300?random=1" alt=""><p>Sunset Glow</p></div>
+      <div class="art-card"><img src="https://picsum.photos/300?random=2" alt=""><p>Abstract Dreams</p></div>
+      <div class="art-card"><img src="https://picsum.photos/300?random=3" alt=""><p>Tranquil Forest</p></div>
+      <div class="art-card"><img src="https://picsum.photos/300?random=4" alt=""><p>Golden Hour</p></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2>About ArtBzaar</h2>
+    <p>
+      ArtBzaar is a place where creativity comes alive. It's a space for artists to share their work, tell their stories, and connect with people who truly appreciate art. Whether you paint, sketch, click photos, or create digital art, ArtBzaar gives you a stage to show what you love and inspire others.
+For art lovers, it's a spot to discover unique pieces, explore new ideas, and support talented creators. At its heart, ArtBzaar is all about community, inspiration, and the joy of creating—a place where everyone can celebrate art, one piece at a time.
+    </p>
+    <div class="button2">
+ <a href="signup.html"> <button class="btn2"> Sign Up Now!</button></a>
+</div>
+  <!-- Footer -->
+  
+  </section>
+   <!-- About the Developer Section -->
+<section id="developer" class="developer">
+  <h2>About the Developer</h2>
+
+  <div class="developer-container">
+    <div class="developer-photo">
+      <img src="/static/rachit.jpg" alt="Rachit Singh Rana">
+    </div>
+
+    <div class="developer-text">
+      <p>
+        ArtBzaar is developed by <strong>Rachit Singh Rana</strong>, a Computer Science undergraduate at
+        <strong>NIT Delhi</strong>. With a passion for <em>frontend development, fine arts, and digital design</em>,
+        he created this platform to bridge the gap between creativity and technology.
+        Rachit has led multiple creative initiatives — Graphic Head of the Cultural Club
+        — and continues to explore the intersection of art and innovation.
+      </p>
+
+      <div class="dev-links">
+        <a href="https://www.linkedin.com/in/rachitsrana" target="_blank" class="btn2">Connect on LinkedIn</a>
+        <a href="mailto:rana.s.rachit@gmail.com" class="btn2">Contact Developer</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+    <p>© 2025 ArtBzaar |  Rachit Singh Rana</p>
+  </footer>
+</body>
+</html>

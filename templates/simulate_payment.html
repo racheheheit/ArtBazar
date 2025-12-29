@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Payment | ArtBzaar</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #c6f3ff, #0a3359);
+      color: #fff;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      width: 420px;
+      margin: auto;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    .amount {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 15px 0;
+    }
+    button {
+      background: #fff;
+      color: #333;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin: 10px;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .gpay {
+      background-color: #f3f3f3;
+      color: rgb(39, 39, 39);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .gpay img {
+      height: 22px;
+      vertical-align: middle;
+    }
+    .flash-container {
+  width: 80%;
+  max-width: 500px;
+  margin: 15px auto;
+  text-align: center;
+}
+.flash-message {
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  font-family: Poppins, sans-serif;
+  margin-bottom: 10px;
+  animation: fadeIn 0.4s ease;
+}
+.flash-message.success { background-color: #4CAF50; }  
+.flash-message.danger { background-color: #f44336; }  
+.flash-message.warning { background-color: #ff9800; }  
+.flash-message.info { background-color: #2196F3; }   
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+  </style>
+</head>
+<body>
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+    
+  <div class="card">
+    
+    <h2>Mock Payment Gateway</h2>
+    <p>Order ID: {{ order.Order_ID }}</p>
+    <p class="amount">Amount: ₹{{ order.Total_Amount }}</p>
+    <p style="font-size:14px; opacity:0.8;">This is a simulation — no real payment will be made.</p>
+
+    <form action="/mock_payment_result" method="POST">
+      <input type="hidden" name="order_id" value="{{ order.Order_ID }}">
+
+      <!-- Google Pay Styled Button -->
+      <button class="gpay" type="submit" name="status" value="success">
+        <img src="{{url_for('static',filename='googlepay.webp')}}">
+        Pay with Google Pay
+      </button>
+
+      <br><br>
+      <button type="submit" name="status" value="fail"> Simulate Failure</button>
+    </form>
+  </div>
+</body>
+</html>

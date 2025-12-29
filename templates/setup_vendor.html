@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Complete Vendor Profile | ArtBzaar</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #c6f3ff, #0a3359);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .card {
+    background: #ffffff;
+    width: 450px;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.20);
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0a3359;
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0a3359;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #9bb6cf;
+    background: #f7faff;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    transition: 0.2s;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #0a3359;
+    background: #ffffff;
+    box-shadow: 0 0 6px rgba(10,51,89,0.25);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #0a3359;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.25s;
+  }
+
+  button:hover {
+    background: #092c4d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(10,51,89,0.35);
+  }
+</style>
+
+</head>
+<body>
+
+<div class="card">
+  <div class="title">Vendor Profile</div>
+
+  <form method="POST">
+
+    <label>Business Type</label>
+    <input type="text" name="business_type" placeholder="Art supplies, framing, printing..." required>
+
+    <label>Business Location</label>
+    <input type="text" name="location" placeholder="City / Store address" required>
+
+    <label>Contact Number</label>
+    <input type="text" name="contact" placeholder="Enter contact number" required>
+
+    <button type="submit">Save Profile</button>
+  </form>
+</div>
+
+</body>
+</html>

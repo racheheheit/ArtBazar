@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Gallery | ArtBzaar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #547781, #0a3359);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    header .logo { display: flex; align-items: center; gap: 10px; }
+    header .logo img { width: 45px; }
+    header h1 { font-size: 1.5rem; }
+
+    nav a {
+      text-decoration: none;
+      color: #fff;
+      margin-left: 1.5rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: #ffd56a; }
+
+    .container {
+      padding: 2rem 3rem;
+      flex: 1;
+    }
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 2.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 25px rgba(10, 51, 89, 0.3);
+  transition: 0.3s ease;
+}
+
+.filter-bar:hover {
+  transform: scale(1.01);
+}
+
+.filter-bar input,
+.filter-bar select,
+.filter-bar button {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.filter-bar input,
+.filter-bar select {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+  width: 200px;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.08);
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+  box-shadow: 0 0 10px rgba(227, 182, 86, 0.8);
+  transform: scale(1.03);
+}
+
+.filter-bar button {
+  background: linear-gradient(135deg, #e3b656, #ffd56a);
+  color: #0a3359;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.filter-bar button:hover {
+  background: linear-gradient(135deg, #f9e39a, #e3b656);
+  color: #000;
+  transform: translateY(-2px);
+}
+
+
+.art-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 1.2rem;
+  text-align: center;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  position: relative;
+}
+
+.art-card:hover {
+  transform: translateY(-10px) scale(1.03);
+  background: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.art-card:hover::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 22px;
+  background: radial-gradient(circle at top left, rgba(255,255,255,0.25), transparent 60%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.art-card .image-box {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 15px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  transition: 0.3s ease;
+}
+
+.art-card:hover .image-box {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.art-card img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  transition: transform 0.4s ease, filter 0.3s ease;
+}
+
+.art-card:hover img {
+  transform: scale(1.07);
+  filter: brightness(1.1);
+}
+
+/* Text refinement */
+.art-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.art-card p {
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+}
+
+.price {
+  font-weight: 600;
+  color: #ffd56a;
+  font-size: 1.05rem;
+  margin-bottom: 0.8rem;
+}
+
+
+/* === GLOWING RATING STARS === */
+.rating {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+  color: #e3b656;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(227, 182, 86, 0.8);
+  position: relative;
+}
+
+/* Subtle shimmer for ratings */
+.rating::after {
+  content: "✨";
+  position: absolute;
+  right: -18px;
+  top: -4px;
+  font-size: 0.9rem;
+  opacity: 0;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Hover glow */
+.art-card:hover .rating {
+  color: #ffd56a;
+  text-shadow: 0 0 12px rgba(255, 213, 106, 0.9);
+}
+
+/* Optional link styling */
+.rating a {
+  color: #ffd56a;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.rating a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+
+
+
+
+    .art-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+    }
+
+    /* --- CARD STYLE --- */
+    .art-card {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .art-card:hover {
+      transform: translateY(-8px) scale(1.03);
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 6px 25px rgba(255, 255, 255, 0.25);
+    }
+
+    /* ✅ Image Container (perfect fit) */
+    .art-card .image-box {
+      width: 100%;
+      height: 240px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      padding: 6px;
+    }
+
+    
+    .art-card img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      transition: transform 0.4s ease, filter 0.3s ease;
+      display: block;
+      margin: auto;
+      background: #f8f8f8;
+    }
+
+    .art-card:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.05);
+    }
+
+  
+    .art-card h3 {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .art-card p { 
+      font-size: 0.9rem; 
+      color: #eee; 
+      margin-bottom: 0.4rem; 
+    }
+
+    .price { 
+      font-weight: 600; 
+      color: #ffd56a; 
+      margin-bottom: 0.8rem; 
+    }
+
+   
+    form.add-cart-form button {
+      background: #fff;
+      color: #0a3359;
+      border: none;
+      border-radius: 30px;
+      padding: 0.6rem 1.4rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form.add-cart-form button:hover {
+      background: linear-gradient(135deg, #c6f3ff, #0a3359);
+      color: #fff;
+      transform: scale(1.07);
+    }
+    
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 600px) {
+      .filter-bar input, .filter-bar select {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="ArtBzaar Logo">
+      <h1>Welcome, {{ customer_name }}</h1>
+    </div>
+    <nav>
+      <a href="{{ url_for('cart') }}">🛒 Cart</a>
+      <a href="{{ url_for('my_orders') }}"> Orders</a>
+      <a href="{{ url_for('customer_dashboard') }}"> Dashboard</a>
+      <a href="{{ url_for('logout') }}"> Logout</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <form class="filter-bar" method="get" action="{{ url_for('customer_gallery') }}">
+      <input type="text" name="q" placeholder="Search artworks, artists, or keywords" value="{{ search_query }}">
+      <select name="type">
+        <option value="">All Types</option>
+        {% for t in art_types %}
+          <option value="{{ t }}" {% if t == art_type %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+      <input type="number" name="min_price" placeholder="Min Price" value="{{ min_price }}">
+      <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}">
+      <button type="submit">Filter</button>
+    </form>
+
+    {% if artworks %}
+  <div class="art-grid">
+
+   
+    {% for artwork in artworks %}
+    <div class="art-card">
+      <div class="image-box">
+        <img src="{{ artwork.Image }}" alt="{{ artwork.Title }}">
+      </div>
+      <h3>{{ artwork.Title }}</h3>
+      <p>By {{ artwork.Artist_Name }}</p>
+      <p>{{ artwork.Type }}</p>
+      <p class="price">₹{{ artwork.Price }}</p>
+
+      <form action="{{ url_for('add_to_cart', artwork_id=artwork.Artwork_ID) }}" method="POST" class="add-cart-form">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
+    {% endfor %}
+
+   
+    {% for s in supplies %}
+    <div class="art-card">
+      <div class="image-box">
+        <img src="{{ s.Image }}" alt="{{ s.Title }}">
+      </div>
+      <h3>{{ s.Title }}</h3>
+      <p>By {{ s.Vendor_Name }}</p>
+      <p>{{ s.Type }}</p>
+      <p class="price">₹{{ s.Price }}</p>
+
+      <form action="{{ url_for('add_supply_to_cart', supply_id=s.Supply_ID) }}" method="POST" class="add-cart-form">
+        <button type="submit">Add to Cart</button>
+      </form>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+    </div>
+    {% else %}
+      <p style="text-align:center; margin-top:2rem;">No artworks found matching your filters.</p>
+    {% endif %}
+  </div>
+
+  <footer>
+    <p>© 2025 ArtBzaar | Rachit Singh Rana</p>
+  </footer>
+</body>
+</html>
